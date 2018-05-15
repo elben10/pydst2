@@ -1,0 +1,30 @@
+pydst package
+=============
+
+Submodules
+----------
+
+pydst\.cli module
+-----------------
+
+.. automodule:: pydst.cli
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pydst\.pydst module
+-------------------
+
+.. automodule:: pydst.pydst
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: pydst
+    :members:
+    :undoc-members:
+    :show-inheritance:
