@@ -1,6 +1,6 @@
 from requests import get
 from pandas import DataFrame
-from utils import *
+from pydst.utils import *
 
 class DstTables(object):
     def __init__(self, lang='en'):

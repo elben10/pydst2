@@ -1,4 +1,4 @@
-from utils import *
+from pydst.utils import *
 from requests import get
 import sys
 
