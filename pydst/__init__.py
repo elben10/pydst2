@@ -6,4 +6,4 @@ __author__ = """Jakob Jul Elben"""
 __email__ = 'elbenjakobjul@gmail.com'
 __version__ = '0.1.0.9000'
 
-from pydst.subjects import DstSubjects
+from pydst.pydst import DST

@@ -1,7 +1,11 @@
 from pandas import DataFrame
-from urllib3.exceptions import HTTPError as BaseHTTPError
 
 def assign_lang(lang):
+    """Returns lang if the language is valid
+    Args:
+        lang (str):
+            lang can take the values `da` or `en` for Danish, English respectively
+    """
     if not lang in ['en', 'da']:
         raise ValueError('language can only take the values `en` or `da`. See documentation')
     return lang
