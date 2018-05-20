@@ -7,6 +7,7 @@ from pydst.utils import assign_lang, desc_to_df, Error
 from requests import get
 from pandas import DataFrame, to_datetime, read_csv
 from collections import OrderedDict
+from io import BytesIO
 
 class DST(object):
     def __init__(self, lang='en'):
@@ -79,11 +80,35 @@ class DST(object):
         res['values'] = values
         return res
 
-    def get_data(self, tableId=None):
-        if isinstance(tableId, type(None)):
+    def get_data(self, tableID=None, params=None):
+        metadata = self.get_meta(tableID=tableID)
+        if isinstance(tableID, type(None)):
             raise ValueError('tableID must be provided')
-        elif not isinstance(tableId, str):
+        elif not isinstance(tableID, str):
             raise ValueError('tableID must be a string')
 
-        base_url = 'https://api.statbank.dk/v1/data/{}/BULK?lang={}&valuePresentation=Default&delimiter=Semicolon'.format(tableId, self.lang)
+        if not isinstance(params, (dict, type(None))):
+            raise ValueError('params must be None or dict')
+        elif isinstance(params, dict):
+            if not all([x.upper() in [x.upper() for x in metadata['id'].tolist()] for x in params.keys()]):
+                bad_vars = [x for x in params.keys() if (x.upper() not in metadata['id'].tolist())]
+                raise ValueError('The following variables does not exists within the specified table: {}'.format(','.join(bad_vars)))
+            if not all(isinstance(x, (str, list)) for x in params.values()):
+                raise ValueError('variable values must be either a string or a list')
+            if not all(isinstance(x, str) for j in params.values() for x in j if isinstance(j, list)):
+                raise ValueError('variable values within a list must only be strings')
+            params = {x:(y if isinstance(y, str) else ','.join(y)) for x,y in params.items()}
+
+
+        if isinstance(params, dict):
+            base_param = {x:list(y)[0] for x,y in zip(metadata['id'].tolist(), metadata['values']) if not x in params.keys()}
+            params = {**base_param, **{x.upper():y for x,y in params.items()}}
+        else:
+            params = {x:list(y)[0] for x,y in zip(metadata['id'].tolist(), metadata['values'])}
+
+        params_string = '&'.join([x + '=' + y for x, y in params.items()])
+
+        base_url = 'https://api.statbank.dk/v1/data/{}/BULK?lang={}&valuePresentation=Default&delimiter=Semicolon&{}'.format(tableID, self.lang, params_string)
         r = get(base_url)
+
+        return read_csv(BytesIO(r.content), delimiter=';')
