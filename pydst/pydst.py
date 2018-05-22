@@ -29,6 +29,8 @@ class DST(object):
     -----
     Plots are not produced for zero eigenvalues.
 
+    .. todo:: blabla
+
     """
 
     def __init__(self, lang='en'):

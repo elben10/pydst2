@@ -5,10 +5,7 @@
 
 import pytest
 
-from click.testing import CliRunner
-
 import pydst
-from pydst import cli
 from pandas import DataFrame
 
 
