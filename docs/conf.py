@@ -165,3 +165,5 @@ texinfo_documents = [
 # NUMPYDOC SETTINGS
 
 numpydoc_show_class_members = False
+
+exclude_patterns = ['modules.rst']

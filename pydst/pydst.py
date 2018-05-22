@@ -10,6 +10,27 @@ from collections import OrderedDict
 from io import BytesIO
 
 class DST(object):
+    """Returns a phasor plot of the given eigenvalues and eigenvectors.
+
+    Attributes
+    ----------
+    lang : The eigenvalues.
+
+    Returns
+    -------
+    figs : list
+        A list of matplotlib figures.
+
+    Notes
+    -----
+    Plots are not produced for zero eigenvalues.
+
+    TODO
+    -----
+    Plots are not produced for zero eigenvalues.
+
+    """
+
     def __init__(self, lang='en'):
         """Initiation of DstSubjects
 

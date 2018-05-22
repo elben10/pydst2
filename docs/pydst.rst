@@ -4,14 +4,6 @@ pydst package
 Submodules
 ----------
 
-pydst\.cli module
------------------
-
-.. automodule:: pydst.cli
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 pydst\.pydst module
 -------------------
 

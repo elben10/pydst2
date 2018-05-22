@@ -11,14 +11,14 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = ['Click>=6.0', ]
+requirements = []
 
 setup_requirements = ['pytest-runner', ]
 
 test_requirements = ['pytest', ]
 
 setup(
-    author="Jakob Jul Elben",
+    author="Jakob Jul Elben, Kristian Urup Larsen",
     author_email='elbenjakobjul@gmail.com',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
